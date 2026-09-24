@@ -1,0 +1,36 @@
+{
+  "name": "@vultr/model-provider-pi",
+  "version": "0.0.1",
+  "description": "Vultr Inference for pi: the live /v1/models catalog as a model provider",
+  "author": "Matt Harris <mharris@vultr.com>",
+  "maintainers": ["Matt Harris <mharris@vultr.com>"],
+  "license": "MIT",
+  "type": "module",
+  "keywords": ["pi-package", "vultr", "model-provider"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vultr/model-provider-pi.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "files": ["extensions", "src", "README.md"],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test \"test/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@vultr/model-catalog": "git+https://github.com/vultr/model-catalog-typescript.git#v0.0.1"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.85.1",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}
