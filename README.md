@@ -5,10 +5,16 @@ Vultr Inference as a model provider for [pi](https://pi.dev). The model list, co
 ## Install
 
 ```bash
-pi install git:github.com/vultr/model-provider-pi
+pi install npm:@vultr/model-provider-pi
 export VULTR_INFERENCE_API_KEY=...
 pi --list-models vultr
 pi --model vultr/glm-5.3:high
+```
+
+To install from the Git repository instead:
+
+```bash
+pi install git:github.com/vultr/model-provider-pi
 ```
 
 From a local checkout, pi references the directory in place (it does not copy
