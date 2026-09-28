@@ -1,5 +1,5 @@
 import type { ProviderModelConfig } from "@earendil-works/pi-coding-agent";
-import { acceptsInput, isChatModel, pricePerMillion, type CatalogModel } from "@vultr/model-catalog";
+import { acceptsInput, isAgentModel, pricePerMillion, type CatalogModel } from "@vultr/model-catalog";
 
 type ThinkingLevelMap = NonNullable<ProviderModelConfig["thinkingLevelMap"]>;
 
@@ -22,9 +22,10 @@ export function thinkingLevelMap(model: CatalogModel): ThinkingLevelMap | undefi
   return map;
 }
 
-// pi needs a context window to budget a turn, so a model without one is not offered.
+// pi drives tools and budgets a turn against the context window: a model without tool calling or a
+// context window is not offered.
 export function isUsable(model: CatalogModel): boolean {
-  return isChatModel(model) && model.isReady && model.contextWindow !== null;
+  return isAgentModel(model);
 }
 
 export function toPiModel(model: CatalogModel): ProviderModelConfig {
