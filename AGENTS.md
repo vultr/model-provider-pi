@@ -26,10 +26,25 @@ Human overview, mapping table and install: `README.md`.
   mandatory.
 - **Siblings:** `model-provider-openclaw` maps onto almost the same model type (OpenClaw is built on pi). A mapping fix here usually applies there too
 
+## Validation
+
+Fast (inner loop):
+- `node --test test/<name>.test.ts` - one test file. `npm test -- <path>`
+  does not narrow: the script's glob still runs every file
+- `node --test --test-name-pattern "<name>" test/<name>.test.ts` - one test
+- `npm run typecheck` - types only
+
+Full (once, before calling a change complete):
+- `npm run typecheck` and `npm test` must pass
+
+Heavy (never in the inner loop; run once at the end in the background):
+- the check against the installed pi (below, and the README's key-free
+  capture setup)
+
 ## Working here
 
-- `npm run typecheck` and `npm test` must pass. Types come from the real
-  `@earendil-works/pi-coding-agent` package; do not redeclare them
+- Types come from the real `@earendil-works/pi-coding-agent` package; do not
+  redeclare them
 - pi loads the `.ts` sources through jiti and the tests run them on Node's type
   stripping: keep the source erasable and keep `.ts` on relative imports
 - `@earendil-works/*` packages are provided by pi: `peerDependencies` with
