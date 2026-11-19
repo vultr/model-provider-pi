@@ -18,9 +18,11 @@ const USER_AGENT = `vultr-model-provider-pi/${version}`;
 export default async function (pi: ExtensionAPI) {
   const baseUrl = process.env[BASE_URL_ENV] || DEFAULT_BASE_URL;
   try {
-    // The catalog is public: no key is needed to list models, only to call them.
+    // The catalog asks for no key. One that is set goes with the read, so the list is the one that key gets.
+    const key = process.env[API_KEY_ENV];
     const catalog = await loadCatalog({
       baseUrl,
+      ...(key ? { apiKey: key } : {}),
       userAgent: USER_AGENT,
       timeoutMs: 5_000,
       cachePath: join(getAgentDir(), "cache", "vultr-model-catalog.json"),

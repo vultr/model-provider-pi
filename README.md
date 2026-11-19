@@ -38,7 +38,9 @@ provider is registered before startup finishes and before `--list-models`
 answers. It calls `loadCatalog` and registers provider `vultr` with
 `api: "openai-completions"` and `apiKey: "$VULTR_INFERENCE_API_KEY"`.
 
-The catalog is public: no key is needed to list models, only to call them.
+The catalog asks for no key: one is needed only to call a model. When
+`VULTR_INFERENCE_API_KEY` is set it is sent with the catalog read too, so the list
+is the one that key gets.
 pi only lists providers that have credentials, so `--list-models` shows
 nothing until `VULTR_INFERENCE_API_KEY` is set.
 
@@ -64,7 +66,7 @@ so the published output limit is passed through unchanged.
 
 | Variable | Meaning |
 | --- | --- |
-| `VULTR_INFERENCE_API_KEY` | Sent as the Bearer token on chat requests |
+| `VULTR_INFERENCE_API_KEY` | Sent as the Bearer token on chat requests and on the catalog read |
 | `VULTR_INFERENCE_BASE_URL` | Overrides `https://api.vultrinference.com/v1` for the catalog and for requests |
 
 ## Development
